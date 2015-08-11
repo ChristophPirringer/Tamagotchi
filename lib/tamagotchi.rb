@@ -1,14 +1,10 @@
 class Tamagotchi
-
+  attr_reader :name, :food, :sleep, :activity
   define_method(:initialize) do |name|
     @name = name
     @food = 5
     @sleep = 5
     @activity = 5
-  end
-
-  define_method(:name) do
-    @name
   end
 
   define_method(:set_food) do |new_level|
@@ -29,6 +25,12 @@ class Tamagotchi
     else
       false
     end
+  end
+
+  define_method(:day_passes) do
+    @food -= 1
+    @sleep -= 1
+    @activity -= 1
   end
 
 end
