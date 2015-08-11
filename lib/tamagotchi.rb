@@ -15,8 +15,16 @@ class Tamagotchi
     @food = new_level
   end
 
+  define_method(:set_sleep) do |new_level|
+    @sleep = new_level
+  end
+
+  define_method(:set_activity) do |new_level|
+    @activity = new_level
+  end
+
   define_method(:dead?) do
-    if @food == 0
+    if @food == 0 || @sleep == 0
       true
     else
       false

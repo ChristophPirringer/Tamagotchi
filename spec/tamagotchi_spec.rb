@@ -22,6 +22,18 @@ describe(Tamagotchi) do
       @dave.set_food(1)
       expect(@dave.dead?()).to(eq(false))
     end
+
+    it('checks if dave has died of sleep deprivation and returns true for sleep==0') do
+      @dave = Tamagotchi.new("dave")
+      @dave.set_sleep(0)
+      expect(@dave.dead?()).to(eq(true))
+    end
+
+    it('checks if dave has died of sleep deprivation and returns false for sleep==1') do
+      @dave = Tamagotchi.new("dave")
+      @dave.set_sleep(1)
+      expect(@dave.dead?()).to(eq(false))
+    end
   end
 
 end
