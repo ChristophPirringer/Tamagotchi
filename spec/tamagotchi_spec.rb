@@ -8,7 +8,6 @@ describe(Tamagotchi) do
 
   describe("#initialize") do
     it('sets the name of a new tamagotchi') do
-
       expect(@dave.name()).to(eq("dave"))
     end
   end
@@ -52,7 +51,7 @@ describe(Tamagotchi) do
     it('caps the food to a max of 5') do
       @dave.set_food(5)
       @dave.feed()
-      expect(@dave.food).to(eq(5))
+      expect(@dave.food).to(eq(5 ))
     end
 
   end
@@ -76,9 +75,18 @@ describe(Tamagotchi) do
   describe('#bored') do
     it('alerts the player if his tamagotchi is bored') do
       @dave.set_activity(0)
-      @dave.bored()
       expect(@dave.bored).to(eq("I am bored, play with me!"))
     end
   end
 
+  describe('#mood') do
+    it('alerts the player to the mood of dave') do
+      @dave.set_happiness(0)
+      @dave.set_activity(3)
+      @dave.set_food(4)
+      @dave.set_sleep(3)
+
+      expect(@dave.mood).to(eq("Grumpy"))
+    end
+  end
 end
