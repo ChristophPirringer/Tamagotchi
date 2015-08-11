@@ -38,7 +38,7 @@ describe(Tamagotchi) do
   describe('#day_passes') do
     it('deincrements food, sleep and activity levels by 1') do
       @dave.day_passes()
-      expect(@dave.activity()).to(eq(4))
+      expect(@dave.activity()).to(eq(3))
     end
   end
 
@@ -48,6 +48,13 @@ describe(Tamagotchi) do
       @dave.feed()
       expect(@dave.food).to(eq(4))
     end
+
+    it('caps the food to a max of 5') do
+      @dave.set_food(5)
+      @dave.feed()
+      expect(@dave.food).to(eq(5))
+    end
+
   end
 
   describe('#nap') do
@@ -65,4 +72,13 @@ describe(Tamagotchi) do
       expect(@dave.activity).to(eq(3))
     end
   end
+
+  describe('#bored') do
+    it('alerts the player if his tamagotchi is bored') do
+      @dave.set_activity(0)
+      @dave.bored()
+      expect(@dave.bored).to(eq("I am bored, play with me!"))
+    end
+  end
+
 end
