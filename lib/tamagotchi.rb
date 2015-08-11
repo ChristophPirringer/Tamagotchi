@@ -3,13 +3,13 @@ class Tamagotchi
   @@backgrounds = {alive: "http://orig10.deviantart.net/0971/f/2013/242/4/b/kittylarge_by_ate_bit-d6kb87n.gif",
     dead: "http://img-cache.cdn.gaiaonline.com/0f68eca0345f973a9f2be2eba829ab9c/http://i288.photobucket.com/albums/ll194/mediocreseed/tumblr_m0ul9z25Di1qb274l_zpsre66tqt4.gif"}
 
-  attr_reader :name, :food, :sleep, :activity
+  attr_reader :name, :food, :alertness, :activity
   define_method(:initialize) do |name|
     @name = name
     @food = 5
-    @sleep = 5
+    @alertness = 5
     @activity = 5
-    @happiness = @sleep + @food + @activity
+    @happiness = @alertness + @food + @activity
   end
 
   define_singleton_method(:clear) do
@@ -33,7 +33,7 @@ class Tamagotchi
   end
 
   define_method(:set_sleep) do |new_level|
-    @sleep = new_level
+    @alertness = new_level
   end
 
   define_method(:set_activity) do |new_level|
@@ -45,22 +45,29 @@ class Tamagotchi
   end
 
   define_method(:dead?) do
-    if @food == 0 || @sleep == 0
+    if @food == 0 || @alertness == 0
       true
     else
       false
     end
   end
 
+  define_method(:death_clock) do
+    while self.dead? == false
+      self.day_passes()
+      Kernel.sleep(5)
+    end
+  end
+
   define_method(:read_happiness) do
-    @happiness = @sleep + @food + @activity
+    @happiness = @alertness + @food + @activity
   end
 
   define_method(:day_passes) do
     @food -= 2
     @food = 0 if @food < 0
-    @sleep -= 1
-    @sleep = 0 if @sleep < 0
+    @alertness -= 1
+    @alertness = 0 if @alertness < 0
     @activity -= 2
     @activity = 0 if @activity < 0
   end
@@ -72,8 +79,8 @@ class Tamagotchi
   end
 
   define_method(:nap) do
-    @sleep += 1
-    @sleep = 5 if @sleep > 5
+    @alertness += 1
+    @alertness = 5 if @alertness > 5
   end
 
   define_method(:play) do
@@ -82,11 +89,11 @@ class Tamagotchi
   end
 
   define_method(:message) do
-    if @food == 0 || @sleep == 0
+    if @food == 0 || @alertness == 0
       "..."
     elsif @food <= 2
       "I am hungry, feed me!"
-    elsif @sleep <= 2
+    elsif @alertness <= 2
       "I am tired, let me sleep!"
     elsif @activity <= 1
       "I am bored, play with me!"

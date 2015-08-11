@@ -3,13 +3,14 @@ require("sinatra/reloader")
 also_reload("lib/**/*.rb")
 require("./lib/tamagotchi")
 
+
 get("/") do
   @@backgrounds = Tamagotchi.backgrounds()
   Tamagotchi.clear()
   @dave = Tamagotchi.new('dave')
   @dave.save()
-  @dave.message()
   erb(:index)
+  # @dave.death_clock()
 end
 
 get("/feed") do
