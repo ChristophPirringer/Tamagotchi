@@ -18,6 +18,8 @@ class Tamagotchi
   define_method(:dead?) do
     if @food == 0
       true
+    else
+      false
     end
   end
 
