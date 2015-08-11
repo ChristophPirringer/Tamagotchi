@@ -1,9 +1,24 @@
 <h1>Behold the mighty Dave!</h1>
 
 <div id="davepic" style="height: 500px; width: 500px">
-  <img src='http://orig10.deviantart.net/0971/f/2013/242/4/b/kittylarge_by_ate_bit-d6kb87n.gif'>
+  <% if @dave.dead? %>
+    <img src= <%= @@backgrounds.fetch(:dead) %>>
+    <style>
+      p {
+        color: black;
+      }
+    </style>
+  <% else %>
+    <img src=<%= @@backgrounds.fetch(:alive)%>>
+    <style>
+    p {
+      color: white;
+    }
+  </style>
+
+  <% end %>
 </div>
-<div id="davestats" style="color: white; z-index: 1000;">
+<div id="davestats" style="z-index: 1000;">
 
   <p>The food-level of Dave is: <%= @dave.food %></p>
   <p>The sleep-level of Dave is: <%= @dave.sleep %></p>

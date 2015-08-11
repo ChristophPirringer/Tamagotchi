@@ -4,6 +4,7 @@ also_reload("lib/**/*.rb")
 require("./lib/tamagotchi")
 
 get("/") do
+  @@backgrounds = Tamagotchi.backgrounds()
   Tamagotchi.clear()
   @dave = Tamagotchi.new('dave')
   @dave.save()
