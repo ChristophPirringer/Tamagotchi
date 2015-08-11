@@ -33,4 +33,16 @@ class Tamagotchi
     @activity -= 1
   end
 
+  define_method(:feed) do
+    @food += 2
+  end
+
+  define_method(:nap) do
+    @sleep += 1
+  end
+
+  define_method(:play) do
+    @activity += 2
+  end
+
 end

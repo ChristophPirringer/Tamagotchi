@@ -35,11 +35,34 @@ describe(Tamagotchi) do
     end
   end
 
-  describe('.day_passes') do
+  describe('#day_passes') do
     it('deincrements food, sleep and activity levels by 1') do
       @dave.day_passes()
       expect(@dave.activity()).to(eq(4))
     end
   end
 
+  describe('#feed') do
+    it('increments food by 2') do
+      @dave.set_food(2)
+      @dave.feed()
+      expect(@dave.food).to(eq(4))
+    end
+  end
+
+  describe('#nap') do
+    it('increments sleep by 1') do
+      @dave.set_sleep(1)
+      @dave.nap()
+      expect(@dave.sleep).to(eq(2))
+    end
+  end
+
+  describe('#play') do
+    it('increments activity by 2') do
+      @dave.set_activity(1)
+      @dave.play()
+      expect(@dave.activity).to(eq(3))
+    end
+  end
 end
